@@ -9,7 +9,7 @@ import BannerImage3 from '../assets/banner/banner3.png'
 
 const Banner = () => {
     return (
-        <div className='lg:ml-20 lg:mr-20 lg:mt-10'>
+        <div className='max-w-7xl mx-auto lg:mt-10'>
             <Carousel autoPlay={true}
                 infiniteLoop={true}
                 showThumbs={false}

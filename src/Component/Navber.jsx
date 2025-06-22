@@ -13,7 +13,7 @@ const Navber = () => {
 
     return (
         <div className=''>
-            <div className="navbar lg:pl-20 lg:pr-20 bg-base-100 shadow-sm ">
+            <div className="navbar lg:pl-60 lg:pr-60 bg-base-100 shadow-sm ">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -37,7 +37,7 @@ const Navber = () => {
                         }
                     </ul>
                 </div>
-                <div className="navbar-end gap-3">
+                <div className="navbar-end space-x-3 hidden lg:flex  ">
                     <button className='btn'>Sign In</button>
                     <button className='btn bg-[#CAEB66] rounded-xl'>Be a Rider</button>
                 </div>

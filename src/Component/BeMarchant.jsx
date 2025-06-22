@@ -4,7 +4,7 @@ import image2 from '../assets/be-a-merchant-bg.png'
 
 const BeMarchant = () => {
     return (
-        <div className="px-4 md:px-10 lg:px-28">
+        <div className="max-w-7xl mx-auto">
   <div data-aos="zoom-in-up" className=" bg-no-repeat bg-[#03373D]  p-6 md:p-12 lg:p-20 rounded-2xl text-white"
   style={{ backgroundImage: `url(${image2})` }}>
 

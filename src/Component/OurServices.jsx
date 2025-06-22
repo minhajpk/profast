@@ -38,7 +38,7 @@ const services = [
 
 const OurServices = () => {
   return (
-    <section className="lg:ml-20 lg:mr-20 p-3 mt-16 rounded-xl bg-[#03373D]">
+    <section className="max-w-7xl mx-auto p-3 lg:mt-16 mt-5  rounded-xl bg-[#03373D]">
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-bold text-white pt-10">Our Services</h2>
         <p className="mt-4 text-white max-w-2xl mx-auto">
@@ -48,7 +48,7 @@ const OurServices = () => {
 
       <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:pl-30 lg:pr-30 pb-20 ">
         {services.map((service, index) => (
-          <div key={index} className="card bg-base-200 p-6 shadow-md hover:bg-[#CAEB66] hover:shadow-lg transition-all duration-300">
+          <div key={index} data-aos="fade-up" className="card bg-base-200 p-6 shadow-md hover:bg-[#CAEB66] hover:shadow-lg transition-all duration-300">
             <div className="card-body items-center text-center">
               <div className='w-18 h-18 rounded-full  flex justify-center items-center bg-radial-[at_55%_55%] from-white to-blue-100 to-75%'>{service.icon}</div>
               <h3 className="card-title text-[#03373D] text-lg mt-4">{service.title}</h3>

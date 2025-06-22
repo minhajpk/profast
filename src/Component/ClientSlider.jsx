@@ -14,7 +14,7 @@ const logos = [logo1, logo2, logo3, logo4, logo5, logo6, logo7];
 
 const ClientSlider = () => {
   return (
-   <div className=" py-10 lg:px-28 p-3 rounded-2xl mt-10 ">
+   <div className=" py-10 max-w-7xl mx-auto p-3 rounded-2xl mt-10 ">
     <h3 className='text-center text-2xl font-extrabold pt-10 pb-10 text-[#03373D]'>We've helped thousands of sales teams</h3>
       <Marquee gradient={false} speed={40}>
         <div className="flex gap-20 items-center ">

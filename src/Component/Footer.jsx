@@ -10,8 +10,8 @@ const Footer = () => {
         <li>Be a Rider</li>
     </>
     return (
-        <div className=' mt-10 '>
-            <footer className="footer footer-horizontal footer-center bg-[#0B0B0B]  text-white p-10">
+        <div className=' mt-10  '>
+            <footer className="footer footer-horizontal footer-center bg-[#0B0B0B] lg:pl-60 lg:pr-60 shadow-sm  text-white p-10">
                 <aside>
                     <div className='flex items-end'>
                         <img className='mb-2' src={Logo} alt="" />

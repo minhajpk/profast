@@ -27,13 +27,13 @@ const benefits = [
 
 const Benefits = () => {
   return (
-    <section className="bg-[#f1f4f6] py-10 px-4 lg:px-28  ">
+    <section className="bg-[#f1f4f6] py-10 px-4 max-w-7xl mx-auto">
         <div className=' border-t border-b border-gray-300 border-dashed '>
             <h2 className='text-center text-3xl font-bold mt-10 text-[#03464D]'>Why Choose Us</h2>
       <div className="space-y-8  mt-10 mb-10">
         {benefits.map((benefit, index) => (
           <div
-            key={index}
+            key={index} data-aos="fade-up-right"
             className="flex flex-col lg:flex-row items-center gap-6 p-6 lg:p-10 lg:h-60 bg-white rounded-xl shadow-sm"
           >
             <img src={benefit.image} alt={benefit.title} className="w-40 lg:w-48" />
