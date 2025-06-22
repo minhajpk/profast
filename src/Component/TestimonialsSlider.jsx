@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCoverflow, Pagination } from "swiper/modules";
+import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
@@ -92,10 +92,10 @@ const TestimonialsSlider = () => {
                 }}
                 pagination={{ clickable: true }}
                 autoplay={{
-                    delay: 3000,
+                    delay: 2000,
                     disableOnInteraction: false,
                 }}
-                modules={[EffectCoverflow, Pagination]} // ✅ include Autoplay here
+                modules={[EffectCoverflow, Pagination, Autoplay]} // ✅ include Autoplay here
                 className="w-full max-w-4xl mx-auto"
             >
                 {/* Slides go here */}

@@ -1,11 +1,12 @@
 import React from 'react';
 import Logo from '../assets/logo.png'
+import { Link } from 'react-router';
 
 const Navber = () => {
     const links = <>
         <li>Services</li>
         <li>Coverage</li>
-        <li>About Us</li>
+        <Link to='/about-us'><li>About Us</li></Link>
         <li>Pricing</li>
         <li>Be a Rider</li>
     </>
@@ -39,7 +40,7 @@ const Navber = () => {
                 </div>
                 <div className="navbar-end space-x-3 hidden lg:flex  ">
                     <button className='btn'>Sign In</button>
-                    <button className='btn bg-[#CAEB66] rounded-xl'>Be a Rider</button>
+                    <Link to='/be-a-rider'><button className='btn bg-[#CAEB66] rounded-xl'>Be a Rider</button></Link>
                 </div>
             </div>
         </div>
