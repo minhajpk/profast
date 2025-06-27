@@ -7,6 +7,9 @@ import Roots from '../Pages/Roots';
 import Home from '../Pages/Home';
 import BeARiderForm from '../Pages/BeARiderForm';
 import AboutUs from '../Pages/AboutUs';
+import AuthLayout from '../AuthLayout/AuthLayout';
+import Login from '../Authentication/Login';
+import Register from '../Authentication/Register';
 
  export const router = createBrowserRouter([
   {
@@ -27,6 +30,20 @@ import AboutUs from '../Pages/AboutUs';
         }
     ]
   },
+  {
+    path: '/',
+    Component: AuthLayout,
+    children:[
+        {
+            path: 'login',
+            Component: Login
+        },
+        {
+            path:'register',
+            Component: Register
+        }
+    ]
+  }
 ]);
 
 

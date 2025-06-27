@@ -26,10 +26,10 @@ const Navber = () => {
                             {links}
                         </ul>
                     </div>
-                    <div className='flex items-end'>
+                    <Link to='/'><div className='flex items-end'>
                         <img className='mb-2' src={Logo} alt="" />
                         <p className='text-2xl -ml-2 font-extrabold'>ProFast</p>
-                    </div>
+                    </div></Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 gap-5">
@@ -39,7 +39,7 @@ const Navber = () => {
                     </ul>
                 </div>
                 <div className="navbar-end space-x-3 hidden lg:flex  ">
-                    <button className='btn'>Sign In</button>
+                    <Link to='/login'><button className='btn'>Sign In</button></Link>
                     <Link to='/be-a-rider'><button className='btn bg-[#CAEB66] rounded-xl'>Be a Rider</button></Link>
                 </div>
             </div>
