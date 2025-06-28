@@ -13,8 +13,8 @@ const AuthLayout = () => {
           <Outlet />
         </div>
       </div>
-      <div className="lg:flex justify-center items-center bg-[#FAFDF7] px-8">
-        <img
+      <div data-aos="fade-up-left" className="lg:flex justify-center items-center bg-[#FAFDF7] px-8">
+        <img 
           src={authImage}
           alt="Courier Illustration"
           className="max-w-xs md:max-w-sm lg:max-w-md w-full"
