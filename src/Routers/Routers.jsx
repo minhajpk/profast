@@ -11,6 +11,7 @@ import AuthLayout from '../AuthLayout/AuthLayout';
 import Login from '../Authentication/Login';
 import Register from '../Authentication/Register';
 import Coverage from '../Pages/Coverage';
+import AddParcelForm from '../Pages/AddParcelForm';
 
  export const router = createBrowserRouter([
   {
@@ -31,7 +32,13 @@ import Coverage from '../Pages/Coverage';
         },
         {
           path: "/coverage",
+          loader: () => fetch("/warehouses.json"),
           Component: Coverage
+        },
+        {
+          path:"add-parcel",
+           loader: () => fetch("/warehouses.json"),
+          Component: AddParcelForm
         }
     ]
   },

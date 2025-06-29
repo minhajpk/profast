@@ -8,7 +8,7 @@ const Navber = () => {
         <NavLink to="/coverage" className={({ isActive }) => isActive ? "  text-[#03373D] font-bold bg-[#CAEB66] " : "text-[#03373D] hover:scale-105 transition duration-300 htext-[#03373D]bold hover:bg-[#CAEB66]"} ><li className='m-2 text-xl hover:bg-blue-300'>Coverage</li></NavLink>
         <NavLink to="/about-us" className={({ isActive }) => isActive ? "  text-[#03373D] font-bold bg-[#CAEB66] " : "text-[#03373D] hover:scale-105 transition duration-300 htext-[#03373D]bold hover:bg-[#CAEB66]"} ><li className='m-2 text-xl hover:bg-blue-300'>About Us</li></NavLink>
         <NavLink to="/about-us" className={({ isActive }) => isActive ? "  text-[#03373D] font-bold bg-[#CAEB66] " : "text-[#03373D] hover:scale-105 transition duration-300 htext-[#03373D]bold hover:bg-[#CAEB66]"} ><li className='m-2 text-xl hover:bg-blue-300'>Pricing</li></NavLink>
-        <NavLink to="/be-a-rider" className={({ isActive }) => isActive ? "  text-[#03373D] font-bold bg-[#CAEB66] " : "text-[#03373D] hover:scale-105 transition duration-300 hover:font-bold hover:bg-lime-500"} ><li className='m-2 text-xl hover:bg-blue-300'>Be a Rider</li></NavLink>
+        <NavLink to="/be-a-rider" className={({ isActive }) => isActive ? "  text-[#03373D] font-bold bg-[#CAEB66] " : "text-[#03373D] hover:scale-105 transition duration-300  hover:bg-[#CAEB66]"} ><li className='m-2 text-xl hover:bg-blue-300'>Be a Rider</li></NavLink>
 
 
 
