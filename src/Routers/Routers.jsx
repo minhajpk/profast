@@ -12,6 +12,10 @@ import Login from '../Authentication/Login';
 import Register from '../Authentication/Register';
 import Coverage from '../Pages/Coverage';
 import AddParcelForm from '../Pages/AddParcelForm';
+import PrivateRoute from './PrivateRoute';
+import DashboardLayout from '../adminLayout/DashboardLayout';
+import MyParcels from '../Pages/DashboardPage/MyParcels';
+
 
  export const router = createBrowserRouter([
   {
@@ -36,7 +40,7 @@ import AddParcelForm from '../Pages/AddParcelForm';
           Component: Coverage
         },
         {
-          path:"add-parcel",
+          path:"/add-parcel",
            loader: () => fetch("/warehouses.json"),
           Component: AddParcelForm
         }
@@ -55,7 +59,22 @@ import AddParcelForm from '../Pages/AddParcelForm';
             Component: Register
         }
     ]
-  }
+  },
+  {
+  path: "/dashboard",
+  element: (
+    <PrivateRoute>
+      <DashboardLayout />
+    </PrivateRoute>
+  ),
+  children: [
+    {
+      path: "my-parcels",
+      element: <MyParcels /> 
+    }
+  ]
+}
+
 ]);
 
 

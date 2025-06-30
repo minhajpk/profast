@@ -1,10 +1,10 @@
-import React, { use, useContext } from "react";
+import React, { use } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { useLoaderData } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
-import axios from "axios";
-// import useAxiosSecure from "../hooks/useAxiosSecure"; // Uncomment if you have this
+import axiosSecure from "../Hooks/axiosSecure";
+
 
 const generateTrackingID = () => {
   const date = new Date();
@@ -19,6 +19,7 @@ const AddParcelForm = () => {
     handleSubmit,
     watch,
     formState: { errors },
+    reset,
   } = useForm({
     defaultValues: {
       type: "document",
@@ -26,7 +27,7 @@ const AddParcelForm = () => {
   });
 
   const { user } = use(AuthContext);
-  // const axiosSecure = useAxiosSecure(); // Use this if implemented, else fallback to axios
+  const axiosSecures = axiosSecure();
 
   const serviceCenters = useLoaderData();
   const uniqueRegions = [...new Set(serviceCenters.map((w) => w.region))];
@@ -119,9 +120,8 @@ const AddParcelForm = () => {
 
         console.log("Submitting parcel data:", parcelData);
 
-        // If you have axiosSecure, replace axios with axiosSecure here:
-        axios
-          .post("/parcels", parcelData)
+        
+        axiosSecures.post("/parcels", parcelData)
           .then((res) => {
             console.log("Server response:", res.data);
             if (res.data.insertedId) {
@@ -132,7 +132,8 @@ const AddParcelForm = () => {
                 timer: 1500,
                 showConfirmButton: false,
               });
-              // TODO: Implement redirect here, e.g. navigate to payment page
+              reset();
+              
             }
           })
           .catch((err) => {
