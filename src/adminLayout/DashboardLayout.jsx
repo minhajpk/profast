@@ -1,9 +1,11 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router';
+import Logo from '../Component/Logo';
+import { FaHome, FaBox, FaHistory, FaMapMarkerAlt, FaUserEdit } from 'react-icons/fa';
 
 const DashboardLayout = () => {
     return (
-        <div className="drawer lg:drawer-open">
+        <div className="drawer lg:drawer-open ">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col">
 
@@ -27,18 +29,41 @@ const DashboardLayout = () => {
                         </label>
                     </div>
                     <div className="mx-2 flex-1 px-2 lg:hidden">Dashboard</div>
-                    
+
                 </div>
                 <Outlet></Outlet>
 
             </div>
-            <div className="drawer-side">
+            <div className="drawer-side bg-blue-100">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4"> 
+                <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
                     {/* Sidebar content here */}
-                    {/* <ProFastLogo></ProFastLogo> */}
-                    <li><a>Home</a></li>
-                    <li><NavLink to="/dashboard/my-Parcels">My Parcels</NavLink></li>
+                    <div className='p-3'><Logo></Logo></div>
+                    <li>
+                        <NavLink to='/'>
+                            <FaHome className="inline mr-2" /> Home
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/my-Parcels">
+                            <FaBox className="inline mr-2" /> My Parcels
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/payment-history">
+                            <FaHistory className="inline mr-2" /> Payment History
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/track-parcel">
+                            <FaMapMarkerAlt className="inline mr-2" /> Track Parcel
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/update-profile">
+                            <FaUserEdit className="inline mr-2" /> Update Profile
+                        </NavLink>
+                    </li>
                 </ul>
             </div>
         </div>

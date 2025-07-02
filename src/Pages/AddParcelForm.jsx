@@ -1,9 +1,10 @@
 import React, { use } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 import axiosSecure from "../Hooks/axiosSecure";
+
 
 
 const generateTrackingID = () => {
@@ -13,7 +14,9 @@ const generateTrackingID = () => {
   return `PCL-${datePart}-${rand}`;
 };
 
+
 const AddParcelForm = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -133,6 +136,7 @@ const AddParcelForm = () => {
                 showConfirmButton: false,
               });
               reset();
+               navigate(`/dashboard/payment/${res.data.insertedId}`);
               
             }
           })
