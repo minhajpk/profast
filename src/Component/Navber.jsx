@@ -1,9 +1,12 @@
 import React from 'react';
 import Logo from '../assets/logo.png'
 import { Link, NavLink } from 'react-router';
+import { FaHome, FaServicestack, FaMapMarkedAlt, FaInfoCircle, FaDollarSign, FaMotorcycle } from "react-icons/fa";
+
 
 const Navber = () => {
     const links = <>
+        <NavLink to="/" className={({ isActive }) => isActive ? "  text-[#03373D]  font-bold bg-[#CAEB66]  " : "text-[#03373D] hover:scale-105 transition duration-300 hover:font-bold hover:bg-[#CAEB66]"} ><li className='m-2 text-xl hover:bg-blue-300'>Home</li></NavLink>
         <NavLink to="/" className={({ isActive }) => isActive ? "  text-[#03373D]  font-bold bg-[#CAEB66]  " : "text-[#03373D] hover:scale-105 transition duration-300 hover:font-bold hover:bg-[#CAEB66]"} ><li className='m-2 text-xl hover:bg-blue-300'>Service</li></NavLink>
         <NavLink to="/coverage" className={({ isActive }) => isActive ? "  text-[#03373D] font-bold bg-[#CAEB66] " : "text-[#03373D] hover:scale-105 transition duration-300 htext-[#03373D]bold hover:bg-[#CAEB66]"} ><li className='m-2 text-xl hover:bg-blue-300'>Coverage</li></NavLink>
         <NavLink to="/about-us" className={({ isActive }) => isActive ? "  text-[#03373D] font-bold bg-[#CAEB66] " : "text-[#03373D] hover:scale-105 transition duration-300 htext-[#03373D]bold hover:bg-[#CAEB66]"} ><li className='m-2 text-xl hover:bg-blue-300'>About Us</li></NavLink>
@@ -17,7 +20,7 @@ const Navber = () => {
 
     return (
         <div className=''>
-            <div className="navbar lg:pl-60 lg:pr-60 bg-base-100 shadow-sm ">
+            <div className="navbar lg:pl-60 lg:pr-60 bg-base-100 shadow-sm  ">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
