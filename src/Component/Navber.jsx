@@ -7,11 +7,12 @@ import { FaHome, FaServicestack, FaMapMarkedAlt, FaInfoCircle, FaDollarSign, FaM
 const Navber = () => {
     const links = <>
         <NavLink to="/" className={({ isActive }) => isActive ? "  text-[#03373D]  font-bold bg-[#CAEB66]  " : "text-[#03373D] hover:scale-105 transition duration-300 hover:font-bold hover:bg-[#CAEB66]"} ><li className='m-2 text-xl hover:bg-blue-300'>Home</li></NavLink>
-        <NavLink to="/" className={({ isActive }) => isActive ? "  text-[#03373D]  font-bold bg-[#CAEB66]  " : "text-[#03373D] hover:scale-105 transition duration-300 hover:font-bold hover:bg-[#CAEB66]"} ><li className='m-2 text-xl hover:bg-blue-300'>Service</li></NavLink>
+        {/* <NavLink to="/" className={({ isActive }) => isActive ? "  text-[#03373D]  font-bold bg-[#CAEB66]  " : "text-[#03373D] hover:scale-105 transition duration-300 hover:font-bold hover:bg-[#CAEB66]"} ><li className='m-2 text-xl hover:bg-blue-300'>Service</li></NavLink> */}
         <NavLink to="/coverage" className={({ isActive }) => isActive ? "  text-[#03373D] font-bold bg-[#CAEB66] " : "text-[#03373D] hover:scale-105 transition duration-300 htext-[#03373D]bold hover:bg-[#CAEB66]"} ><li className='m-2 text-xl hover:bg-blue-300'>Coverage</li></NavLink>
-        <NavLink to="/about-us" className={({ isActive }) => isActive ? "  text-[#03373D] font-bold bg-[#CAEB66] " : "text-[#03373D] hover:scale-105 transition duration-300 htext-[#03373D]bold hover:bg-[#CAEB66]"} ><li className='m-2 text-xl hover:bg-blue-300'>About Us</li></NavLink>
-        <NavLink to="/add-parcel" className={({ isActive }) => isActive ? "  text-[#03373D] font-bold bg-[#CAEB66] " : "text-[#03373D] hover:scale-105 transition duration-300 htext-[#03373D]bold hover:bg-[#CAEB66]"} ><li className='m-2 text-xl hover:bg-blue-300'>Pricing</li></NavLink>
+
+        <NavLink to="/add-parcel" className={({ isActive }) => isActive ? "  text-[#03373D] font-bold bg-[#CAEB66] " : "text-[#03373D] hover:scale-105 transition duration-300 htext-[#03373D]bold hover:bg-[#CAEB66]"} ><li className='m-2 text-xl hover:bg-blue-300'>Send a Parcel</li></NavLink>
         <NavLink to="/be-a-rider" className={({ isActive }) => isActive ? "  text-[#03373D] font-bold bg-[#CAEB66] " : "text-[#03373D] hover:scale-105 transition duration-300  hover:bg-[#CAEB66]"} ><li className='m-2 text-xl hover:bg-blue-300'>Be a Rider</li></NavLink>
+                <NavLink to="/about-us" className={({ isActive }) => isActive ? "  text-[#03373D] font-bold bg-[#CAEB66] " : "text-[#03373D] hover:scale-105 transition duration-300 htext-[#03373D]bold hover:bg-[#CAEB66]"} ><li className='m-2 text-xl hover:bg-blue-300'>About Us</li></NavLink>
 
 
 
@@ -46,7 +47,7 @@ const Navber = () => {
                 </div>
                 <div className="navbar-end space-x-3 hidden lg:flex  ">
                     <Link to='/login'><button className='btn'>Sign In</button></Link>
-                    <Link to='/be-a-rider'><button className='btn bg-[#CAEB66] rounded-xl'>Be a Rider</button></Link>
+                    <Link to='/register'><button className='btn bg-[#CAEB66] rounded-xl'>Register</button></Link>
                 </div>
             </div>
         </div>

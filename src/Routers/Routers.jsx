@@ -31,6 +31,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/be-a-rider",
+         loader: () => fetch("/warehouses.json"),
         Component: BeARiderForm
       },
       {

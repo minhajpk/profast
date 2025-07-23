@@ -1,36 +1,71 @@
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, Navigate, NavLink, useNavigate } from 'react-router';
 import { AuthContext } from '../Context/AuthContext';
 import Swal from 'sweetalert2';
 import Icon from '../assets/user.png'
 import Logo from '../Component/Logo';
+import axios from 'axios';
+import useAxios from '../Hooks/axiosInstance';
 
 
 const Register = () => {
-    const { signInWithGoogle, createUser, user, logOut } = use(AuthContext);
+    const { signInWithGoogle, createUser, user, logOut, updateUserProfile } = use(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [profile, setProfile] = useState();
     const navigate = useNavigate();
+    const axiosInstance = useAxios();
 
-
-    const onSubmit = data => {
-        console.log(data)
-        createUser(data.email, data.password)
-            .then(result => {
-                console.log(result.user);
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Account created successfully!",
-                    showConfirmButton: false,
-                    timer: 2000
-                });
-                navigate('/');
-            })
-            .catch(error => {
-                console.error(error);
+    const onSubmit = async (data) => {
+        if (!profile) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Please upload a profile image first.'
             });
+            return;
+        }
+
+        try {
+            const result = await createUser(data.email, data.password);
+            console.log(result.user);
+
+            const userInfo = {
+                email: data.email,
+                name: data.name,
+                role: 'user',
+                photoURL: profile,
+                created_at: new Date().toISOString()
+            };
+
+            const userRes = await axiosInstance.post('/users', userInfo);
+            console.log(userRes.data);
+
+            const userProfile = {
+                displayName: data.name,
+                photoURL: profile,
+            };
+
+            await updateUserProfile(userProfile);
+
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Account created successfully!",
+                showConfirmButton: false,
+                timer: 2000,
+            });
+
+            navigate('/');
+        } catch (error) {
+            console.error("User creation failed:", error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Registration failed',
+                text: error.message
+            });
+        }
     };
+
     const handleLogout = () => {
         logOut()
     }
@@ -53,12 +88,36 @@ const Register = () => {
             });
     };
 
+    const handleImageUpload = async (e) => {
+        const image = e.target.files[0];
+        const formData = new FormData();
+        formData.append('image', image);
+
+        try {
+            const imagUploadUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_upload_key}`;
+            const res = await axios.post(imagUploadUrl, formData);
+
+            const imageUrl = res.data.data.url;
+            setProfile(imageUrl); 
+            console.log("Image uploaded successfully:", imageUrl);
+        } catch (error) {
+            console.error("Image upload failed:", error.message);
+            Swal.fire({
+                icon: "error",
+                title: "Image upload failed",
+                text: error.message
+            });
+        }
+    };
+
+
+
 
     return (
         <div data-aos="fade-up-right" className='max-w-7xl mx-auto'>
-             <div className='mb-5 lg:-ml-30 -ml-4'>
-             <Logo></Logo>
-           </div>
+            <div className='mb-5 lg:-ml-30 -ml-4'>
+                <Logo></Logo>
+            </div>
             <div>
                 <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">Welcome Back</h2>
                 <p className="text-gray-500 mb-6 text-sm md:text-base">Register with Profast</p>
@@ -91,27 +150,40 @@ const Register = () => {
                 }
 
             </div>
-            <form  onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <fieldset className="fieldset">
                     <label className="label">Name</label>
                     <input {...register('name')} type="text" className="input w-full" placeholder="Name" />
                     <label className="label">Email</label>
                     <input {...register('email')} type="email" className="input w-full" placeholder="Email" />
-                    <label className="label">Photo URL</label>
-                    <input {...register('Photo')} type="text" className="input w-full" placeholder="Photo URL" />
+                    <div>
+                        <label htmlFor="profileImage" className="label">
+                            <span className="label-text">Profile Picture</span>
+                        </label>
+                        <input
+                            id="profileImage"
+                            type="file"
+                            onChange={handleImageUpload}
+                            className="file-input file-input-bordered w-full"
+
+                        />
+                        {errors.profileImage && (
+                            <p className="text-red-500 text-sm mt-1">{errors.profileImage.message}</p>
+                        )}
+                    </div>
                     <label className="label">Password</label>
                     <input
                         type="password"
                         {...register('password', {
                             required: true,
-                            minLength: 8,
+                            minLength: 6,
                             pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
                         })}
                         className="input w-full"
                         placeholder="Password"
                     />
                     {errors.password?.type === ' required' && <p className='text-red-500'>Password is required</p>}
-                    {errors.password?.type === 'minLength' && <p className='text-red-500'>Password must be at least 8 characters long.</p>}
+                    {errors.password?.type === 'minLength' && <p className='text-red-500'>Password must be at least 6 characters long.</p>}
                     {errors.password?.type === 'pattern' && <p className='text-red-500'>Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.</p>}
                     <button className="btn  mt-4 bg-[#CAEB66] text-[#03373D] hover:scale-105 transition duration-300 hover:bg-[#CAEB66] hover:text-[#03373D]">Register</button>
                     <p>Don’t have any account? <Link to='/login'><span className='text-lime-600 font-bold'>Login</span></Link></p>
