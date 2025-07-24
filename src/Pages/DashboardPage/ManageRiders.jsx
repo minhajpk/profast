@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../Hooks/axiosSecure';
@@ -7,6 +7,7 @@ import useAxiosSecure from '../../Hooks/axiosSecure';
 const ManageRiders = () => {
     const axiosSecures = useAxiosSecure();
     const queryClient = useQueryClient();
+    const [selectedRider, setSelectedRider] = useState(null);
 
     // GET all riders
     const { data: riders = [], isLoading } = useQuery({
@@ -93,6 +94,7 @@ const ManageRiders = () => {
         <th>Contact</th>
         <th>Warehouse</th>
         <th>Status</th>
+        {/* <th>CreatedAt</th> */}
         <th>Actions</th>
       </tr>
     </thead>
@@ -117,6 +119,7 @@ const ManageRiders = () => {
               {rider.status}
             </span>
           </td>
+          {/* <td>{rider.warehouse}</td> */}
           <td className="space-x-2 whitespace-nowrap">
             <button
               onClick={() => handleUpdate(rider, 'approved', 'rider')}
@@ -140,12 +143,47 @@ const ManageRiders = () => {
             >
               Delete
             </button>
+             <button
+                      onClick={() => setSelectedRider(rider)}
+                      className="btn btn-info btn-sm text-white"
+                    >
+                      Details
+                    </button>
           </td>
         </tr>
       ))}
     </tbody>
   </table>
 </div>
+       {/* Rider Details Modal */}
+      {selectedRider && (
+        <dialog id="riderDetailsModal" className="modal modal-open">
+          <div className="modal-box max-w-2xl">
+            <h3 className="font-bold text-xl mb-2">Rider Details</h3>
+            <div className="space-y-2">
+              <p><strong>Name:</strong> {selectedRider.name}</p>
+              <p><strong>Email:</strong> {selectedRider.email}</p>
+              <p><strong>Phone:</strong> {selectedRider.contact}</p>
+              <p><strong>Age:</strong> {selectedRider.age}</p>
+              <p><strong>NID:</strong> {selectedRider.nid}</p>
+              <p><strong>Region:</strong> {selectedRider.region}</p>
+              <p><strong>District:</strong> {selectedRider.district}</p>
+              <p><strong>Warehouse:</strong> {selectedRider.warehouse}</p>
+              <p><strong>Applied At:</strong> {selectedRider.createdAt}</p>
+              {selectedRider.note && <p><strong>Note:</strong> {selectedRider.note}</p>}
+            </div>
+
+            <div className="modal-action mt-4">
+              <button
+                className="btn btn-outline"
+                onClick={() => setSelectedRider(null)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </dialog>
+      )}
 
         </div>
     );
