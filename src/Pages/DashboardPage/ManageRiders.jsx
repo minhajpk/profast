@@ -1,0 +1,154 @@
+import React from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import Swal from 'sweetalert2';
+import useAxiosSecure from '../../Hooks/axiosSecure';
+
+
+const ManageRiders = () => {
+    const axiosSecures = useAxiosSecure();
+    const queryClient = useQueryClient();
+
+    // GET all riders
+    const { data: riders = [], isLoading } = useQuery({
+        queryKey: ['riders'],
+        queryFn: async () => {
+            const res = await axiosSecures.get('/riders');
+            return res.data;
+        },
+    });
+
+
+    const axiosSecure = useAxiosSecure();
+
+    const deleteMutation = useMutation({
+        mutationFn: async (id) => {
+            const res = await axiosSecure.delete(`/riders/${id}`);
+            return res.data;
+        },
+        onSuccess: () => {
+            Swal.fire('Deleted!', 'Rider has been deleted.', 'success');
+            queryClient.invalidateQueries(['riders']);
+        },
+        onError: () => {
+            Swal.fire('Error!', 'Failed to delete the rider.', 'error');
+        }
+    });
+
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This action cannot be undone!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteMutation.mutate(id);
+            }
+        });
+    };
+
+    // Mutation for status update
+    const updateStatusMutation = useMutation({
+        mutationFn: async ({ id, status, role }) => {
+            const res = await axiosSecures.patch(`/riders/${id}`, { status, role });
+            return res.data;
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries(['riders']);
+        },
+        onError: () => {
+            Swal.fire("Error", "Something went wrong", "error");
+        }
+    });
+
+    const handleUpdate = (rider, newStatus, newRole) => {
+        Swal.fire({
+            title: `Are you sure?`,
+            text: `You want to set this rider to ${newStatus}`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: `Yes, ${newStatus}`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                updateStatusMutation.mutate({ id: rider._id, status: newStatus, role: newRole });
+            }
+        });
+    };
+
+    if (isLoading) return <p>Loading...</p>;
+
+    return (
+        <div className='p-10'>
+            <h2 className="text-2xl font-bold mb-4">Manage Riders</h2>
+           <div className="overflow-x-auto max-w-full">
+  <table className="table w-full max-w-7xl">
+    <thead className="bg-[#CAEB66] text-[#03373D]">
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Contact</th>
+        <th>Warehouse</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {riders.map((rider, index) => (
+        <tr key={rider._id}>
+          <td>{index + 1}</td>
+          <td>{rider.name}</td>
+          <td>{rider.email}</td>
+          <td>{rider.contact}</td>
+          <td>{rider.warehouse}</td>
+          <td>
+            <span
+              className={`px-2 py-1 text-xs font-semibold rounded ${
+                rider.status === 'Approved'
+                  ? 'bg-green-100 text-green-800'
+                  : rider.status === 'rejected'
+                  ? 'bg-red-100 text-red-800'
+                  : 'bg-yellow-100 text-yellow-700'
+              }`}
+            >
+              {rider.status}
+            </span>
+          </td>
+          <td className="space-x-2 whitespace-nowrap">
+            <button
+              onClick={() => handleUpdate(rider, 'approved', 'rider')}
+              className="btn bg-[#009E60] hover:bg-green-800 text-white font-bold btn-sm mr-2"
+              disabled={rider.status?.toLowerCase() !== 'pending'}
+            >
+              {rider.status?.toLowerCase() === 'approved' ? 'Approved' : 'Approved'}
+            </button>
+
+            <button
+              onClick={() => handleUpdate(rider, 'rejected', 'user')}
+              className="btn bg-red-600 hover:bg-red-700 text-white font-bold btn-sm"
+              disabled={rider.status?.toLowerCase() !== 'pending'}
+            >
+              {rider.status?.toLowerCase() === 'rejected' ? 'Rejected' : 'Reject'}
+            </button>
+
+            <button
+              onClick={() => handleDelete(rider._id)}
+              className="btn btn-sm bg-red-700 hover:bg-red-800 text-white font-bold py-1 px-3 rounded"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+        </div>
+    );
+};
+
+export default ManageRiders;

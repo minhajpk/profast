@@ -31,8 +31,8 @@ const BeARiderForm = () => {
     email: data.email || user?.email || '',
     nid: data.nid,
     contact: data.contact,
-    district: data.district,
     region: data.region,
+    district: data.district,
     warehouse: data.warehouse,
     status: "pending",
     createdAt: new Date().toISOString()

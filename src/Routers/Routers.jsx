@@ -18,6 +18,8 @@ import MyParcels from '../Pages/DashboardPage/MyParcels';
 import Payment from '../Pages/DashboardPage/Payment/Payment';
 import PaymentHistory from '../Pages/DashboardPage/PaymentHistory';
 import Trackparcel from '../Pages/DashboardPage/Trackparcel';
+import PendingRiders from '../Pages/DashboardPage/ManageRiders';
+import ActiveRiders from '../Pages/DashboardPage/ActiveRiders';
 
 
 export const router = createBrowserRouter([
@@ -88,6 +90,15 @@ export const router = createBrowserRouter([
       {
         path: "track-parcel",
         Component: Trackparcel
+      },
+      // admin route
+      {
+        path:'pending-riders',
+        Component: PendingRiders
+      },
+      {
+        path:'active-riders',
+        Component: ActiveRiders
       }
     ]
   }
