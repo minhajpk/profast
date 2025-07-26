@@ -18,7 +18,7 @@ import MyParcels from '../Pages/DashboardPage/MyParcels';
 import Payment from '../Pages/DashboardPage/Payment/Payment';
 import PaymentHistory from '../Pages/DashboardPage/PaymentHistory';
 import Trackparcel from '../Pages/DashboardPage/Trackparcel';
-import PendingRiders from '../Pages/DashboardPage/ManageRiders';
+import PendingRiders from '../Pages/DashboardPage/PendingRiders';
 import ActiveRiders from '../Pages/DashboardPage/ActiveRiders';
 
 

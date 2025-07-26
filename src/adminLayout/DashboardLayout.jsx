@@ -66,7 +66,7 @@ const DashboardLayout = () => {
                     </li>
                     <li>
                         <NavLink to="/dashboard/pending-riders">
-                            <FaUserClock className="inline mr-2" /> Manage Riders
+                            <FaUserClock className="inline mr-2" /> Manage Riders Request
                         </NavLink>
                     </li>
                     <li>
