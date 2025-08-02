@@ -35,7 +35,8 @@ const BeARiderForm = () => {
     district: data.district,
     warehouse: data.warehouse,
     status: "pending",
-    createdAt: new Date().toISOString()
+    createdAt: new Date().toISOString(),
+    
   };
 
   console.log("Submitting rider data:", riderData);
