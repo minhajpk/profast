@@ -30,6 +30,8 @@ const AssignRider = () => {
             const res = await axiosSecures.patch(`/parcels/${parcelId}/assign`, {
                 riderId: rider._id,
                 riderName: rider.name,
+                riderEmail: rider.email,
+                riderContact: rider.contact,
             });
             return res.data;
         },
@@ -75,7 +77,7 @@ const AssignRider = () => {
                 <p className="text-gray-500">No parcels available for assignment.</p>
             ) : (
                 <div className="overflow-x-auto">
-                    <table className="table table-zebra max-w-7xl">
+                    <table className="table  max-w-7xl">
                         <thead className="bg-[#CAEB66] text-[#03373D]">
                             <tr>
                                 <th>Parcel's Title</th>

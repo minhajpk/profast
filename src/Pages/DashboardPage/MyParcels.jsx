@@ -65,8 +65,8 @@ const MyParcels = () => {
   return (
     <div className="overflow-x-auto mt-6 p-6">
       <h1 className="text-2xl font-bold mb-4">My Parcels</h1>
-      <table className="table table-zebra w-full text-sm rounded-2xl ">
-        <thead className="bg-gray-100">
+      <table className="table  max-w-7xl p-6 rounded-2xl ">
+        <thead className="bg-[#CAEB66] text-[#03373D]">
           <tr>
             <th>#</th>
             <th>Parcel Name</th>
@@ -85,9 +85,11 @@ const MyParcels = () => {
               <td className="capitalize">{parcel.type}</td>
               <td>{new Date(parcel.creation_date).toLocaleString()}</td>
               <td>$ {parcel.cost}</td>
-              <td className={parcel.payment_status === 'paid' ? "text-green-600 font-semibold" : "text-red-500 font-semibold"}>
-                {parcel.payment_status}
-              </td>
+             <td>
+  <span className={`font-semibold badge ${parcel.payment_status === 'paid' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
+    {parcel.payment_status}
+  </span>
+</td>
               <td className="flex flex-wrap justify-center gap-2">
                 <button className="btn btn-sm btn-info text-white">View</button>
                 {parcel.payment_status !== 'paid' && (

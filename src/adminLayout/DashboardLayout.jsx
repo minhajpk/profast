@@ -9,6 +9,9 @@ import {
   FaUserEdit,
   FaUserClock,
   FaUserCheck,
+  FaTasks,
+  FaCheckCircle,
+  FaWallet,
 } from 'react-icons/fa';
 import { MdAdminPanelSettings, MdPersonAddAlt1 } from 'react-icons/md';
 import useUserRole from '../Hooks/useUserRole';
@@ -75,6 +78,29 @@ const DashboardLayout = () => {
               <FaUserEdit className="inline-block mr-2" /> Update Profile
             </NavLink>
           </li>
+          {/* {!roleLoading && role === 'rider' && */}
+          <>
+          <li>
+            <NavLink to="/dashboard/pending-deliveries">
+              <FaTasks className="inline-block mr-2" /> Pending Deliveries
+            </NavLink>
+          </li>
+
+           <li>
+                            <NavLink to="/dashboard/completed-deliveries">
+                                <FaCheckCircle className="inline-block mr-2" />
+                                Completed Deliveries
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/dashboard/my-earnings">
+                                <FaWallet className="inline-block mr-2" />
+                                My Earnings
+                            </NavLink>
+                        </li>
+          </>
+          
+          {/* } */}
 
            {/* {!roleLoading && role === 'admin' && */}
                         <>
