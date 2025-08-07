@@ -21,6 +21,9 @@ import Trackparcel from '../Pages/DashboardPage/Trackparcel';
 import PendingRiders from '../Pages/DashboardPage/PendingRiders';
 import ActiveRiders from '../Pages/DashboardPage/ActiveRiders';
 import MakeAdmin from '../Pages/DashboardPage/MakeAdmin';
+import Forbidden from '../Pages/Forbidden';
+import AdminRoute from './AdminRoute';
+import AssignRider from '../Pages/DashboardPage/AssignRider';
 
 
 export const router = createBrowserRouter([
@@ -50,6 +53,10 @@ export const router = createBrowserRouter([
         path: "/add-parcel",
         loader: () => fetch("/warehouses.json"),
         Component: AddParcelForm
+      },
+      {
+        path:'/forbidden',
+        Component: Forbidden
       }
     ]
   },
@@ -99,11 +106,15 @@ export const router = createBrowserRouter([
       },
       {
         path:'active-riders',
-        Component: ActiveRiders
+        element:<AdminRoute><ActiveRiders></ActiveRiders></AdminRoute>
       },
     {
       path: 'make-admin',
       Component: MakeAdmin
+    },
+    {
+      path:'assign-rider',
+      Component: AssignRider
     }
     ]
   }

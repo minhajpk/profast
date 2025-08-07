@@ -10,7 +10,7 @@ import {
   FaUserClock,
   FaUserCheck,
 } from 'react-icons/fa';
-import { MdAdminPanelSettings } from 'react-icons/md';
+import { MdAdminPanelSettings, MdPersonAddAlt1 } from 'react-icons/md';
 import useUserRole from '../Hooks/useUserRole';
 
 const DashboardLayout = () => {
@@ -93,8 +93,13 @@ const DashboardLayout = () => {
               <MdAdminPanelSettings className="inline-block mr-2" /> Make Admin
             </NavLink>
           </li>
-                        </>
-                    }
+          <li>
+           <NavLink to="/dashboard/assign-rider">
+  <MdPersonAddAlt1 className="inline-block mr-2" /> Assign Rider
+</NavLink>
+          </li>
+                        </>   
+{/* }         */}
 
           
         </ul>
