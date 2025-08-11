@@ -37,7 +37,7 @@ A full-featured delivery service web application where users can sign up, create
 ## 📦 Project Dependencies
 
 - `react`  
-- `react-router-dom`  
+- `react-router`  
 - `firebase`  
 - `tailwindcss`  
 - `daisyui`  
