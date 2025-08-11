@@ -30,6 +30,7 @@ A full-featured delivery service web application where users can sign up, create
 | React Icons      | ^4.x    | Icon components                |
 | React Query      | ^4.x    | Data fetching & caching        |
 | React Toastify   | ^9.x    | Toast notifications            |
+| tanstack Quary   | ^4.x    | Data fetching & caching        |
 
 ---
 
@@ -42,7 +43,8 @@ A full-featured delivery service web application where users can sign up, create
 - `daisyui`  
 - `react-icons`  
 - `react-query`  
-- `react-toastify`  
+- `react-toastify`
+- tanstack Quary 
 
 ---
 
