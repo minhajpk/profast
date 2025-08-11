@@ -48,9 +48,9 @@ const PaymentHistory = () => {
                             <td>${payment.amount}</td>
                             <td>{payment.transactionId}</td>
                             <td>{payment.paymentMethod?.[0]}</td>
-                            <td>
+                            
                                <td>{formatDate(payment.paid_at_string)}</td>
-                            </td>
+                            
                         </tr>
                     ))}
                 </tbody>

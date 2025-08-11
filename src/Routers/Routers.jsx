@@ -27,6 +27,8 @@ import AssignRider from '../Pages/DashboardPage/AssignRider';
 import PendingDeliveries from '../Pages/DashboardPage/PendingDeliveries';
 import CompletedDeliveries from '../Pages/DashboardPage/CompletedDeliveries';
 import MyEarnings from '../Pages/DashboardPage/MyEarnings';
+import DashboardHome from '../Pages/DashboardPage/DashboardHome/DashboardHome';
+import RiderRoute from './RiderRoute';
 
 
 export const router = createBrowserRouter([
@@ -41,7 +43,7 @@ export const router = createBrowserRouter([
       {
         path: "/be-a-rider",
          loader: () => fetch("/warehouses.json"),
-        Component: BeARiderForm
+        element:<PrivateRoute><BeARiderForm></BeARiderForm></PrivateRoute>
       },
       {
         path: "/about-us",
@@ -55,7 +57,7 @@ export const router = createBrowserRouter([
       {
         path: "/add-parcel",
         loader: () => fetch("/warehouses.json"),
-        Component: AddParcelForm
+        element:<PrivateRoute><AddParcelForm></AddParcelForm></PrivateRoute>
       },
       {
         path:'/forbidden',
@@ -86,6 +88,10 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
+        index: true,
+        Component: DashboardHome
+      },
+      {
         path: "my-parcels",
         element: <MyParcels />
       },
@@ -105,7 +111,7 @@ export const router = createBrowserRouter([
       // admin route
       {
         path:'pending-riders',
-        Component: PendingRiders
+       element: <AdminRoute><PendingRiders></PendingRiders></AdminRoute>
       },
       {
         path:'active-riders',
@@ -113,23 +119,24 @@ export const router = createBrowserRouter([
       },
     {
       path: 'make-admin',
-      Component: MakeAdmin
+      element: <AdminRoute><MakeAdmin></MakeAdmin></AdminRoute>
     },
     {
       path:'assign-rider',
-      Component: AssignRider
+      element:<AdminRoute><AssignRider></AssignRider></AdminRoute>
     },
+    // rider route
     {
       path:'pending-deliveries',
-      Component: PendingDeliveries
+      element:<RiderRoute><PendingDeliveries></PendingDeliveries></RiderRoute>
     },
     {
       path:'completed-deliveries',
-      Component: CompletedDeliveries
+      element: <RiderRoute><CompletedDeliveries></CompletedDeliveries></RiderRoute>
     },
     {
-      path:'my-earning',
-      Component: MyEarnings
+      path:'my-earnings',
+      element:<RiderRoute><MyEarnings></MyEarnings></RiderRoute>
     }
     ]
   }

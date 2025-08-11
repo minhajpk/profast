@@ -28,6 +28,7 @@ const PendingDeliveries = () => {
     // Mutation for updating parcel status
     const { mutateAsync: updateStatus } = useMutation({
         mutationFn: async ({ parcel, status }) => {
+            console.log("Updating parcel:", parcel._id, "with status:", status);
             const res = await axiosSecure.patch(`/parcels/${parcel._id}/status`, {
                 status,
             });
@@ -48,7 +49,7 @@ const PendingDeliveries = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 updateStatus({ parcel, status: newStatus })
-                    .then( async() => {
+                    .then(async () => {
                         Swal.fire("Updated!", "Parcel status updated.", "success");
 
                         // log tracking
@@ -57,11 +58,11 @@ const PendingDeliveries = () => {
                             trackDetails = `Delivered by ${user.displayName}`
                         }
                         await logTracking({
-                                tracking_id: parcel.tracking_id,
-                                status: newStatus,
-                                details: trackDetails,
-                                updated_by: user.email,
-                            });
+                            tracking_id: parcel.tracking_id,
+                            status: newStatus,
+                            details: trackDetails,
+                            updated_by: user.email,
+                        });
 
                     })
                     .catch(() => {

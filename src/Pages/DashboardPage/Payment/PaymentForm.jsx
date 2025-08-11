@@ -5,6 +5,7 @@ import { useParams, useNavigate, Navigate } from 'react-router';
 import axiosSecure from '../../../Hooks/axiosSecure';
 import { AuthContext } from '../../../Context/AuthContext';
 import Swal from 'sweetalert2';
+import useTrackingLogger from '../../../Hooks/useTrackingLogger';
 
 const PaymentForm = () => {
     const stripe = useStripe();
@@ -13,6 +14,7 @@ const PaymentForm = () => {
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
     const axiosSecures = axiosSecure();
+    const {logTracking} = useTrackingLogger();
 
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
@@ -117,6 +119,15 @@ const PaymentForm = () => {
                         confirmButtonText: 'Go to My Parcels',
                     });
 
+                    await logTracking(
+                            {
+                                tracking_id: parcelInfo.tracking_id,
+                                status: "payment_done",
+                                details: `Paid by ${user.displayName}`,
+                                updated_by: user.email,
+                            }
+                        )
+
                     navigate('/dashboard/my-Parcels');
                 }
             }
@@ -177,12 +188,12 @@ const PaymentForm = () => {
                         <option value="IN">India</option>
                         <option value="GB">United Kingdom</option>
                     </select>
-                    <input
+                    {/* <input
                         type="text"
                         onChange={(e) => setPostalCode(e.target.value)}
                         className="mt-2 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
                         placeholder="Postal Code"
-                    />
+                    /> */}
                 </div>
 
                 {error && <p className="text-red-500 text-sm">{error}</p>}

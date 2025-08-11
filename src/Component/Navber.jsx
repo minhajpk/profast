@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { use } from 'react';
 import Logo from '../assets/logo.png'
 import { Link, NavLink } from 'react-router';
 import { 
@@ -7,11 +7,16 @@ import {
   FaPlusSquare, 
   FaMotorcycle, 
   FaInfoCircle, 
-  FaTachometerAlt 
+  FaTachometerAlt, 
+  FaSignInAlt,
+  FaUserPlus
 } from "react-icons/fa";
+import { AuthContext } from '../Context/AuthContext';
+import Icon from '../assets/user.png';
 
 
 const Navber = () => {
+
     const links = <>
         <NavLink to="/" className={({ isActive }) => isActive ? "  text-[#03373D]  font-bold bg-[#CAEB66]  " : 
         "text-[#03373D] hover:scale-105 transition duration-300 hover:font-bold hover:bg-[#CAEB66]"} ><li className='m-2 text-xl hover:bg-blue-300'>Home</li></NavLink>
@@ -29,6 +34,11 @@ const Navber = () => {
 
 
     </>
+    const {user, logOut} = use(AuthContext)
+
+     const handleLogout = () => {
+        logOut()
+    }
 
 
     return (
@@ -57,10 +67,33 @@ const Navber = () => {
                         }
                     </ul>
                 </div>
-                <div className="navbar-end space-x-3 hidden lg:flex  ">
-                    <Link to='/login'><button className='btn'>Sign In</button></Link>
-                    <Link to='/register'><button className='btn bg-[#CAEB66] rounded-xl'>Register</button></Link>
-                </div>
+                <div className="navbar-end space-x-4  lg:flex">
+                            {user ? (
+                                <div className="dropdown dropdown-end">
+                                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                        <div className="w-10 rounded-full">
+                                            <img src={user?.photoURL || Icon} alt="User" />
+                                        </div>
+                                    </div>
+                                    <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-28">
+                                        <li>
+                                            <button onClick={handleLogout} className="text-green-800 font-bold">Signout</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            ) : (
+                                <div className='space-x-3 hidden lg:flex'>
+                                    <Link to="/login" className="btn bg-white text-[#03373D] hover:bg-[#CAEB66]  flex items-center space-x-1">
+                                        <FaSignInAlt /> <span>Login</span>
+                                    </Link>
+                                    <Link to="/register" className="btn bg-[#CAEB66] text-[#03373D] hover:bg-[#CAEB66]  flex items-center space-x-1">
+                                        <FaUserPlus /> <span>Sign Up</span>
+                                    </Link>
+                                </div>
+                            )}
+                        </div>
+                   
+                
             </div>
         </div>
     );

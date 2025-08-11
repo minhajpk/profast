@@ -78,9 +78,10 @@ const MakeAdmin = () => {
 
             {users.length > 0 && (
                 <div className="overflow-x-auto">
-                    <table className="table w-full table-zebra">
-                        <thead>
+                    <table className="table p-6 max-w-7xl ">
+                        <thead className="bg-[#CAEB66] text-[#03373D]" >
                             <tr>
+                                <th>Name</th>
                                 <th>Email</th>
                                 <th>Created At</th>
                                 <th>Role</th>
@@ -90,11 +91,14 @@ const MakeAdmin = () => {
                         <tbody>
                             {users.map((u) => (
                                 <tr key={u._id}>
+                                    <td>{u.name}</td>
                                     <td>{u.email}</td>
                                     <td>{new Date(u.created_at).toLocaleDateString()}</td>
                                     <td>
                                         <span
-                                            className={`badge ${u.role === "admin" ? "badge-success" : "badge-ghost"
+                                            className={`badge ${u.role === "admin" ? "badge-success" :
+                                                u.role === "rider" ? "badge-warning" :
+                                                    u.role === "user" ? "badge-white" : ""
                                                 }`}
                                         >
                                             {u.role || "user"}
@@ -102,22 +106,22 @@ const MakeAdmin = () => {
                                     </td>
                                     <td>
                                         <button
-                                            onClick={() => handleRoleChange(u._id, u.role || "user")}
-                                            className={`btn btn-sm text-black ${u.role === "admin" ? "btn-error" : "btn-primary"
+                                            className={`btn btn-sm text-[#03373D] ${u.role !== "admin" ? "bg-[#CAEB66]" : "btn-error"
                                                 }`}
                                         >
-                                            {u.role === "admin" ? (
-                                                <>
-                                                    <FaUserTimes className="mr-1" />
-                                                    Remove Admin
-                                                </>
-                                            ) : (
+                                            {u.role !== "admin" ? (
                                                 <>
                                                     <FaUserShield className="mr-1" />
                                                     Make Admin
                                                 </>
+                                            ) : (
+                                                <>
+                                                    <FaUserTimes className="mr-1" />
+                                                    Remove Admin
+                                                </>
                                             )}
                                         </button>
+
                                     </td>
                                 </tr>
                             ))}
